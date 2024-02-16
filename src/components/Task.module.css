@@ -12,15 +12,15 @@
   line-height: 140%;
   margin-bottom: 1.2rem;
 }
+.taskWrap p {
+  flex: 1;
+}
 
 .taskWrap button {
   background-color: transparent;
   border: none;
   color: var(--gray-100);
   padding: 0.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border-radius: 0.4rem;
   cursor: pointer;
 }
