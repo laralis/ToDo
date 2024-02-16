@@ -1,0 +1,20 @@
+.emptyContainer {
+  display: flex;
+  padding: 6.4rem 2.4rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.emptyContainer img {
+  width: 5.6rem;
+  margin-bottom: 1.6rem;
+}
+.emptyContainer p {
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 140%;
+  color: var(--gray-300);
+}
+.emptyContainer p + p {
+  font-weight: 400;
+}
