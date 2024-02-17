@@ -12,6 +12,7 @@ export function App() {
     { content: "Lavar a louça", isChecked: false },
     { content: "Fazer a task", isChecked: false },
   ]);
+  const [doneTasks, setDoneTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   function handleNewTask() {
     setNewTask({ content: event.target.value, isChecked: false });
@@ -24,6 +25,38 @@ export function App() {
       return task.content !== taskToDelete;
     });
     setTasks(arrayWithoutDeletedTask);
+    unlistTaskUndone(taskToDelete);
+  }
+  function listTasksDone(taskDone) {
+    if (doneTasks.length == 0) {
+      setDoneTasks([taskDone]);
+    } else {
+      let counter = 0;
+      for (let i = 0; i < doneTasks.length; i++) {
+        if (doneTasks[i] == taskDone) {
+          counter = counter + 1;
+        }
+      }
+      if (counter > 0) {
+        return;
+      } else if (counter == 0) {
+        return setDoneTasks([...doneTasks, taskDone]);
+      }
+    }
+  }
+  function unlistTaskUndone(taskNotDone) {
+    if (doneTasks.length == 0) {
+      setDoneTasks([]);
+    } else {
+      let array = doneTasks;
+      for (let i = 0; i < doneTasks.length; i++) {
+        if (doneTasks[i] == taskNotDone) {
+          array.splice(i, 1);
+          setDoneTasks(array);
+        }
+      }
+      return setDoneTasks(doneTasks);
+    }
   }
   return (
     <>
@@ -50,7 +83,7 @@ export function App() {
           <Button
             text={"Concluídas"}
             color={"purple"}
-            count={`${tasks.length} de ${tasks.length}`}
+            count={`${doneTasks.length} de ${tasks.length}`}
           />
         </div>
         <main className={styles.contentWrap}>
@@ -64,6 +97,8 @@ export function App() {
                   content={task.content}
                   onDeleteTask={onDelete}
                   isChecked={task.isChecked}
+                  listTasksDone={listTasksDone}
+                  unlistTaskUndone={unlistTaskUndone}
                 />
               );
             })
